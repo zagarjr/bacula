@@ -1,0 +1,50 @@
+# Bacula Tape Library Sample
+#   - 
+Changer {
+  Name = "MyChanger"
+  Device = "Drive-1", "Drive-2"
+  ChangerCommand = "/path/to/mtx-changer-script"
+  ChangerDevice = "/dev/sg0"
+  #AutoChanger = yes                 # (default) Automatically enables autochanger
+  #Enabled = yes                     # (default) Enables the changer
+  #RandomAccess = no                 # (default) Tape devices are not random access
+  #RequiresMount = no                # (default) Changer does not require manual mount
+  #AutoSelect = yes                  # (default) Automatically selects the best volume
+  #LabelMedia = yes                  # (default: yes) Automatically labels new media if no label is present
+  #UseBarcode = no                   # (default: no) Enable barcode scanning for tape identification
+  UseBarcode = yes                   # (default: no) Enable barcode scanning for tape identification
+  #AlertCommand = ""                 # (default) Command to alert on issues
+}
+
+Device {
+  Name = "Drive-1"
+  MediaType = "LTO"
+  ArchiveDevice = "/dev/nst0"
+  AutomaticMount = yes
+  AlwaysOpen = yes
+  RemovableMedia = yes
+  RandomAccess = no
+  AutoChanger = yes                     # (default) Indicates it is part of an autochanger
+  #SpoolDirectory = ""                  # (default) Directory for spooling
+  #MaximumFileSize = 2G                 # (default) Maximum file size for volumes
+  MaximumFileSize = 476G                # Large static datasets, approx 20% of LTO6 native capacity
+  LabelMedia = yes                      # (default) Automatically label new media
+  CleaningPrefix = "CLN"                # (default) Prefix for cleaning volumes
+  #AlertCommand = ""                    # (default) Command to alert on issues
+}
+
+Device {
+  Name = "Drive-2"
+  MediaType = "LTO"
+  ArchiveDevice = "/dev/nst1"
+  AutomaticMount = yes
+  AlwaysOpen = yes
+  RemovableMedia = yes
+  RandomAccess = no
+  AutoChanger = yes                      # (default) Indicates it is part of an autochanger
+  #MaximumFileSize = 2G                  # (default) Maximum file size for volumes
+  MaximumFileSize = 476G                 # Large static datasets, approx 20% of LTO6 native capacity
+  LabelMedia = yes                       # (default) Automatically label new media
+  CleaningPrefix = "CLN"                 # (default) Prefix for cleaning volumes
+  #AlertCommand = ""                     # (default) Command to alert on issues
+}
